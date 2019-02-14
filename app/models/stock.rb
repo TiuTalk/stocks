@@ -4,4 +4,5 @@ class Stock < ApplicationRecord
 
   # Validations
   validates :name, :ticker, :stock_exchange, presence: true
+  validates :ticker, uniqueness: { scope: :stock_exchange_id }
 end
