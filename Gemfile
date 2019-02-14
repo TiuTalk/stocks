@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.2'
+gem 'ratelimit'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'uglifier', '>= 1.3.0'
@@ -33,7 +34,11 @@ group :development do
 end
 
 group :test do
+  gem 'climate_control'
+  gem 'fakeredis'
   gem 'rails-controller-testing'
   gem 'shoulda-matchers', '4.0.0.rc1'
   gem 'simplecov', require: false
+  gem 'vcr', require: false
+  gem 'webmock'
 end
