@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_044637) do
+ActiveRecord::Schema.define(version: 2019_02_14_044745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "stock_exchanges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "alpha_advantage_code", null: false
+    t.string "country", null: false
+    t.string "timeonze", null: false
+    t.string "open", null: false
+    t.string "close", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alpha_advantage_code"], name: "index_stock_exchanges_on_alpha_advantage_code", unique: true
+    t.index ["code"], name: "index_stock_exchanges_on_code", unique: true
+  end
 
 end
