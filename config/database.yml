@@ -23,13 +23,13 @@ default: &default
 
 development:
   <<: *default
-  database: acoes_development
+  database: stocks_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: acoes
+  #username: stocks
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: acoes_test
+  database: stocks_test
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -89,6 +89,6 @@ test:
 #
 production:
   <<: *default
-  database: acoes_production
-  username: acoes
+  database: stocks_production
+  username: stocks
   password: <%= ENV['ACOES_DATABASE_PASSWORD'] %>
