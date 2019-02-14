@@ -65,11 +65,20 @@ jobs:
           name: FactoryBot lint
           command: bundle exec rails factory_bot:lint
 
+      - run:
+          name: Download Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
       # Run specs
       # ==============================
       - run:
           name: RSpec
-          command: bundle exec rspec --format progress --format RspecJunitFormatter --out ~/rspec/rspec.xml
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rspec --format progress --format RspecJunitFormatter --out ~/rspec/rspec.xml
+            ./cc-test-reporter after-build --coverage-input-type simplecov
       - store_test_results:
           path: ~/rspec
 

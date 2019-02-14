@@ -25,3 +25,5 @@
 tags
 spec/examples.txt
 .env
+
+/coverage/*
