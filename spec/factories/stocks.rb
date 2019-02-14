@@ -6,4 +6,5 @@ FactoryBot.define do
   end
 
   factory :fii, parent: :stock, class: 'FII'
+  factory :etf, parent: :stock, class: 'ETF'
 end
