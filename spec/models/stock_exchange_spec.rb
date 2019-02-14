@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe StockExchange, type: :model do
   describe 'associations' do
     it { is_expected.to have_many(:stocks).inverse_of(:stock_exchange).dependent(:destroy) }
+    it { is_expected.to have_many(:fiis).inverse_of(:stock_exchange).dependent(:destroy) }
   end
 
   describe 'validations' do
