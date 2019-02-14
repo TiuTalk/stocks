@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_131355) do
+ActiveRecord::Schema.define(version: 2019_02_14_212723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "quotes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "stock_id"
+    t.date "date", null: false
+    t.decimal "open", precision: 6, scale: 2, null: false
+    t.decimal "close", precision: 6, scale: 2, null: false
+    t.decimal "high", precision: 6, scale: 2, null: false
+    t.decimal "low", precision: 6, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id", "date"], name: "index_quotes_on_stock_id_and_date", unique: true
+    t.index ["stock_id"], name: "index_quotes_on_stock_id"
+  end
 
   create_table "stock_exchanges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -42,5 +55,6 @@ ActiveRecord::Schema.define(version: 2019_02_14_131355) do
     t.index ["type"], name: "index_stocks_on_type"
   end
 
+  add_foreign_key "quotes", "stocks"
   add_foreign_key "stocks", "stock_exchanges"
 end
