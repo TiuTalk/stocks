@@ -1,24 +1,4 @@
-# README
+# Ações
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![CircleCI](https://circleci.com/gh/TiuTalk/acoes/tree/master.svg?style=svg&circle-token=e676891e1274e8962c6e499c2ee9290bdc6e9a3f)](https://circleci.com/gh/TiuTalk/acoes/tree/master)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
