@@ -1,0 +1,22 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  TargetRailsVersion: 5.2
+  Exclude:
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - 'node_modules/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+
+Rails:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
