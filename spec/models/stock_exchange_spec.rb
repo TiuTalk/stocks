@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe StockExchange, type: :model do
+  describe 'associations' do
+    it { is_expected.to have_many(:stocks).inverse_of(:stock_exchange).dependent(:destroy) }
+  end
+
   describe 'validations' do
     %i[name code alpha_advantage_code country timeonze open close].each do |attr|
       it { is_expected.to validate_presence_of(attr) }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_044745) do
+ActiveRecord::Schema.define(version: 2019_02_14_131355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -30,4 +30,17 @@ ActiveRecord::Schema.define(version: 2019_02_14_044745) do
     t.index ["code"], name: "index_stock_exchanges_on_code", unique: true
   end
 
+  create_table "stocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "ticker", null: false
+    t.string "type"
+    t.uuid "stock_exchange_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_exchange_id"], name: "index_stocks_on_stock_exchange_id"
+    t.index ["ticker"], name: "index_stocks_on_ticker", unique: true
+    t.index ["type"], name: "index_stocks_on_type"
+  end
+
+  add_foreign_key "stocks", "stock_exchanges"
 end
