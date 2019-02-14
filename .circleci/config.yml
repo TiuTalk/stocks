@@ -61,6 +61,10 @@ jobs:
           name: Database setup
           command: bundle exec rails db:create db:schema:load --trace
 
+      - run:
+          name: FactoryBot lint
+          command: bundle exec rails factory_bot:lint
+
       # Run specs
       # ==============================
       - run:

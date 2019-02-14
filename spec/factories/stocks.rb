@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :stock do
-    name { 'Itaú SA' }
-    ticker { 'ITSA4' }
+    name { 'Random Stock' }
+    ticker { SecureRandom.hex(3).upcase }
     stock_exchange { create(:stock_exchange) }
   end
 
