@@ -35,7 +35,7 @@ module AlphaVantage
 
     def expire
       Rails.logger.warn("Expiring ALPHA_VANTAGE_API_KEY key #{self}")
-      rate_limit.add(to_s, RATE_LIMITS.keys.max / 2)
+      rate_limit.add(to_s, RATE_LIMITS.keys.min)
     end
 
     def within_bounds?(bounds)

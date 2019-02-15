@@ -50,7 +50,8 @@ module AlphaVantage
 
     class TooManyRequestsException < Alphavantage::Error
       def self.===(exception)
-        exception.message.match?(/No Time Series found/)
+        exception.respond_to?(:data) &&
+          exception.data.dig('Note').to_s.match?(/Our standard API call frequency is/)
       end
     end
   end
