@@ -1,6 +1,7 @@
 class Stock < ApplicationRecord
   # Associations
   belongs_to :stock_exchange, inverse_of: :stocks
+  belongs_to :sector, inverse_of: :stocks, optional: true
   has_many :quotes, inverse_of: :stock, dependent: :destroy
 
   # Scopes

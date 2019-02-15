@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_184856) do
+ActiveRecord::Schema.define(version: 2019_02_15_234607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 2019_02_15_184856) do
     t.integer "volume", null: false
     t.index ["stock_id", "date"], name: "index_quotes_on_stock_id_and_date", unique: true
     t.index ["stock_id"], name: "index_quotes_on_stock_id"
+  end
+
+  create_table "sectors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "stock_exchange_id"
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_exchange_id"], name: "index_sectors_on_stock_exchange_id"
   end
 
   create_table "stock_exchanges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -52,11 +60,15 @@ ActiveRecord::Schema.define(version: 2019_02_15_184856) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "enabled", default: true
+    t.uuid "sector_id"
+    t.index ["sector_id"], name: "index_stocks_on_sector_id"
     t.index ["stock_exchange_id"], name: "index_stocks_on_stock_exchange_id"
     t.index ["ticker"], name: "index_stocks_on_ticker", unique: true
     t.index ["type"], name: "index_stocks_on_type"
   end
 
   add_foreign_key "quotes", "stocks"
+  add_foreign_key "sectors", "stock_exchanges"
+  add_foreign_key "stocks", "sectors"
   add_foreign_key "stocks", "stock_exchanges"
 end
