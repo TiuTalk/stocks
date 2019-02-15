@@ -23,4 +23,31 @@ RSpec.describe Stock, type: :model do
       expect(stock.alpha_advantage_symbol).to eq('ITSA4.SAO')
     end
   end
+
+  describe '#benchmark' do
+    context 'B3' do
+      let(:b3) { create(:stock_exchange, :b3) }
+      let!(:stock) { create(:stock, stock_exchange: b3) }
+      let!(:ibov11) { create(:etf, :ibov11) }
+
+      it 'returns IBOV11' do
+        expect(stock.benchmark).to eq(ibov11)
+      end
+    end
+
+    context 'NYSE' do
+      it 'returns the benchmark ticker'
+    end
+  end
+
+  describe '#to_chart' do
+    it 'return chart object' do
+      stock = create(:stock)
+      3.times { |i| create(:quote, stock: stock, date: (i + 1).days.ago) }
+
+      result = stock.to_chart
+      expect(result[:name]).to eq(stock.name)
+      expect(result[:data].values.sum).to eq(Quote.sum(:close))
+    end
+  end
 end
