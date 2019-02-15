@@ -3,7 +3,7 @@ namespace :factory_bot do
   task lint: :environment do
     if Rails.env.test?
       ActiveRecord::Base.transaction do
-        FactoryBot.lint(traits: true)
+        FactoryBot.lint
         raise ActiveRecord::Rollback
       end
     else

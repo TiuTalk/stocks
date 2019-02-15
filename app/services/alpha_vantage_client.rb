@@ -8,7 +8,7 @@ class AlphaVantageClient
     params = params.reverse_merge(type: 'daily', outputsize: 'full')
     output = stock.timeseries(params).output
     output['Time Series (Daily)'].map do |day, data|
-      { day: Date.parse(day) }.merge(parse_data(data))
+      { date: Date.parse(day) }.merge(parse_data(data))
     end
   end
 

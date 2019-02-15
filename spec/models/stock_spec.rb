@@ -16,4 +16,11 @@ RSpec.describe Stock, type: :model do
       it { is_expected.to validate_uniqueness_of(:ticker).scoped_to(:stock_exchange_id) }
     end
   end
+
+  describe '#alpha_advantage_symbol' do
+    it 'combines the StockExchange#alpha_advantage_code with the Stock#ticker' do
+      stock = build(:stock, :itsa4)
+      expect(stock.alpha_advantage_symbol).to eq('ITSA4.SAO')
+    end
+  end
 end
