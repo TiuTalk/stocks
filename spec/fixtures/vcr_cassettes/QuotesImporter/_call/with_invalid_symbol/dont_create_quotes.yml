@@ -23,17 +23,17 @@ http_interactions:
       Server:
       - gunicorn/19.7.0
       Date:
-      - Fri, 15 Feb 2019 22:08:24 GMT
+      - Fri, 15 Feb 2019 22:17:54 GMT
       Transfer-Encoding:
       - chunked
-      Content-Type:
-      - application/json
-      Allow:
-      - GET, HEAD, OPTIONS
       Vary:
       - Cookie
+      Allow:
+      - GET, HEAD, OPTIONS
       X-Frame-Options:
       - SAMEORIGIN
+      Content-Type:
+      - application/json
       Via:
       - 1.1 vegur
     body:

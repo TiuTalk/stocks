@@ -35,6 +35,9 @@ class QuotesImporter
 
   def quotes
     timeseries.select { |quote| date_range.include?(quote[:date]) }
+  rescue AlphaVantage::Client::InvalidSymbolException
+    @stock.update(enabled: false)
+    []
   end
 
   def timeseries

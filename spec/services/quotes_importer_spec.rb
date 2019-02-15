@@ -20,10 +20,12 @@ RSpec.describe QuotesImporter, type: :service do
       let(:exchange) { build(:stock_exchange, alpha_advantage_code: 'TEST') }
       let(:stock) { build(:stock, ticker: 'TEST12', stock_exchange: exchange) }
 
-      it 'raise error' do
+      it 'dont create quotes' do
         expect do
           described_class.new(stock).call
-        end.to raise_error(Alphavantage::Error, /Invalid API call/)
+        end.to_not change(Quote, :count)
+
+        expect(stock.reload).to_not be_enabled
       end
     end
   end

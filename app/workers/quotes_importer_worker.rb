@@ -13,7 +13,5 @@ class QuotesImporterWorker
   rescue AlphaVantage::Client::TooManyRequestsException
     logger.info('Too many requests.. rescheduling')
     QuotesImporterWorker.perform_in(rand(10..30).minutes, stock_id)
-  rescue Alphavantage::Error => exceptionlast_year
-    stock.update(enabled: false) if exception.message =~ /Invalid API call/
   end
 end
