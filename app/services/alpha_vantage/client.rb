@@ -8,6 +8,7 @@ module AlphaVantage
       fetch_timeseries(symbol, params)
     rescue TooManyRequestsException
       api_key.expire
+      raise
     ensure
       api_key.use
     end
