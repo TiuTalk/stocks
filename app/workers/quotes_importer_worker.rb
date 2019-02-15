@@ -8,10 +8,16 @@ class QuotesImporterWorker
 
     QuotesImporter.new(stock).call_async
   rescue AlphaVantage::ApiKey::MissingAvailableKey
-    logger.info('Missing available API key.. rescheduling')
+    log('Missing available API key.. rescheduling')
     QuotesImporterWorker.perform_in(rand(1..5).minutes, stock_id)
   rescue AlphaVantage::Client::TooManyRequestsException
-    logger.info('Too many requests.. rescheduling')
+    log('Too many requests.. rescheduling')
     QuotesImporterWorker.perform_in(rand(10..30).minutes, stock_id)
+  end
+
+  private
+
+  def log(message)
+    logger.info(message) unless Rails.env.test?
   end
 end
