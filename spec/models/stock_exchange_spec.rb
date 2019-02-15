@@ -17,19 +17,14 @@ RSpec.describe StockExchange, type: :model do
     describe '#b3' do
       it 'return the B3 exchange' do
         b3 = create(:stock_exchange, :b3)
-        _nyse = create(:stock_exchange, :nyse)
+        _other = create(:stock_exchange)
 
         expect(described_class.unscoped.b3).to eq(b3)
       end
     end
 
     describe '#nyse' do
-      it 'return the NYSE exchange' do
-        _b3 = create(:stock_exchange, :b3)
-        nyse = create(:stock_exchange, :nyse)
-
-        expect(described_class.unscoped.nyse).to eq(nyse)
-      end
+      it 'return the NYSE exchange'
     end
   end
 end

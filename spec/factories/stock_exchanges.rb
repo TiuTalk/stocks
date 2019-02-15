@@ -17,13 +17,5 @@ FactoryBot.define do
       open { '09:00:00' }
       close { '18:00:00' }
     end
-
-    trait :nyse do
-      name { 'New York Stock Exchange' }
-      code { 'NYSE' }
-      alpha_advantage_code { 'NYSE' }
-      country { 'USA' }
-      timeonze { 'America/New_York' }
-    end
   end
 end

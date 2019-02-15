@@ -16,7 +16,7 @@ if StockExchange.count.zero?
 
   [
     { name: 'B3', code: 'B3', alpha_advantage_code: 'SAO', country: 'BRA', timeonze: 'America/Sao_Paulo', open: '09:00:00', close: '18:00:00' },
-    { name: 'NYSE', code: 'NYSE', alpha_advantage_code: 'NYSE', country: 'USA', timeonze: 'America/New_York', open: '09:00:00', close: '18:00:00' }
+    # { name: 'NYSE', code: 'NYSE', alpha_advantage_code: 'NYSE', country: 'USA', timeonze: 'America/New_York', open: '09:00:00', close: '18:00:00' }
   ].map(&StockExchange.method(:create!))
 
   puts "  - Created #{StockExchange.count} stock exchanges"
