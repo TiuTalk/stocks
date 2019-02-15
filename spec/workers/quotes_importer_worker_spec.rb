@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe QuotesImporterWorker, type: :worker do
-  let(:stock) { double(Stock) }
+  let(:stock) { double(Stock, enabled?: true) }
   let(:importer) { double(QuotesImporter, call_async: true) }
 
   context 'with valid stock_id' do
