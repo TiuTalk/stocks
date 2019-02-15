@@ -6,5 +6,6 @@ FactoryBot.define do
     close { rand(1..10.0) }
     high { rand(1..10.0) }
     low { rand(1..10.0) }
+    volume { rand(1..1000) }
   end
 end

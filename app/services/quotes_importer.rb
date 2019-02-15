@@ -9,7 +9,7 @@ class QuotesImporter
 
     Parallel.each(quotes, in_threads: 5) do |quote|
       ActiveRecord::Base.connection_pool.with_connection do
-        stock.quotes.find_or_create_by!(quote.except(:volume))
+        stock.quotes.find_or_create_by!(quote)
       end
     end
   end
@@ -18,7 +18,7 @@ class QuotesImporter
     return if already_imported?
 
     quotes.each do |quote|
-      QuoteImporterWorker.perform_async(stock.id, quote.except(:volume))
+      QuoteImporterWorker.perform_async(stock.id, quote)
     end
   end
 
