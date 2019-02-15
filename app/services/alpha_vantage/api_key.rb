@@ -41,8 +41,8 @@ module AlphaVantage
     def within_bounds?(bounds)
       rate_limit.within_bounds?(@api_key, bounds)
     end
-  end
 
-  class MissingAvailableKey < StandardError
+    class MissingAvailableKey < StandardError
+    end
   end
 end
