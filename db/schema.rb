@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_175652) do
+ActiveRecord::Schema.define(version: 2019_02_15_184856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_175652) do
     t.uuid "stock_exchange_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: true
     t.index ["stock_exchange_id"], name: "index_stocks_on_stock_exchange_id"
     t.index ["ticker"], name: "index_stocks_on_ticker", unique: true
     t.index ["type"], name: "index_stocks_on_type"
