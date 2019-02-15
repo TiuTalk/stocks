@@ -51,6 +51,7 @@ module AlphaVantage
     class TooManyRequestsException < Alphavantage::Error
       def self.===(exception)
         exception.respond_to?(:data) &&
+          exception.data.present? &&
           exception.data.dig('Note').to_s.match?(/Our standard API call frequency is/)
       end
     end

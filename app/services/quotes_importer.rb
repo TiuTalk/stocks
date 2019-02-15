@@ -1,5 +1,5 @@
 class QuotesImporter
-  def initialize(stock, since: beginning_of_year)
+  def initialize(stock, since: last_year)
     @stock = stock
     @date_range = since..yesterday
   end
@@ -42,8 +42,8 @@ class QuotesImporter
     AlphaVantage::Client.new.timeseries(stock.alpha_advantage_symbol, outputsize: size)
   end
 
-  def beginning_of_year
-    Time.zone.today.beginning_of_year
+  def last_year
+    1.year.ago.to_date
   end
 
   def yesterday

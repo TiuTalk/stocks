@@ -23,15 +23,15 @@ http_interactions:
       Server:
       - gunicorn/19.7.0
       Date:
-      - Fri, 15 Feb 2019 17:46:34 GMT
+      - Fri, 15 Feb 2019 22:08:22 GMT
       Transfer-Encoding:
       - chunked
       X-Frame-Options:
       - SAMEORIGIN
-      Allow:
-      - GET, HEAD, OPTIONS
       Vary:
       - Cookie
+      Allow:
+      - GET, HEAD, OPTIONS
       Content-Type:
       - application/json
       Via:
@@ -52,8 +52,8 @@ http_interactions:
                     "1. open": "13.2900",
                     "2. high": "13.3400",
                     "3. low": "13.0600",
-                    "4. close": "13.1800",
-                    "5. volume": "17343600"
+                    "4. close": "13.2300",
+                    "5. volume": "31995000"
                 },
                 "2019-02-14": {
                     "1. open": "13.0900",

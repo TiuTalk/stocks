@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.alphavantage.co/query?apikey=<ALPHA_VANTAGE_API_KEY>&function=TIME_SERIES_DAILY&outputsize=compact&symbol=TEST12.TEST
+    uri: https://www.alphavantage.co/query?apikey=<ALPHA_VANTAGE_API_KEY>&function=TIME_SERIES_DAILY&outputsize=full&symbol=TEST12.TEST
     body:
       encoding: US-ASCII
       string: ''
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - gunicorn/19.7.0
       Date:
-      - Fri, 15 Feb 2019 17:51:42 GMT
+      - Fri, 15 Feb 2019 22:08:24 GMT
       Transfer-Encoding:
       - chunked
       Content-Type:
