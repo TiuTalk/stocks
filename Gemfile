@@ -6,8 +6,10 @@ ruby '2.5.3'
 
 gem 'alphavantagerb'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'business'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
+gem 'parallel'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.2'
@@ -15,7 +17,6 @@ gem 'ratelimit'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'uglifier', '>= 1.3.0'
-gem 'parallel'
 
 group :development, :test do
   gem 'dotenv-rails'

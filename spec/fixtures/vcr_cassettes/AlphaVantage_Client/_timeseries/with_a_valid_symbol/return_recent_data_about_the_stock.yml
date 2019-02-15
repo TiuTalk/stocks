@@ -23,17 +23,17 @@ http_interactions:
       Server:
       - gunicorn/19.7.0
       Date:
-      - Thu, 14 Feb 2019 18:10:59 GMT
+      - Fri, 15 Feb 2019 17:30:07 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Cookie
-      X-Frame-Options:
-      - SAMEORIGIN
       Content-Type:
       - application/json
       Allow:
       - GET, HEAD, OPTIONS
+      X-Frame-Options:
+      - SAMEORIGIN
       Via:
       - 1.1 vegur
     body:
@@ -43,17 +43,24 @@ http_interactions:
             "Meta Data": {
                 "1. Information": "Daily Prices (open, high, low, close) and Volumes",
                 "2. Symbol": "ITSA4.SAO",
-                "3. Last Refreshed": "2019-02-14",
+                "3. Last Refreshed": "2019-02-15",
                 "4. Output Size": "Compact",
                 "5. Time Zone": "US/Eastern"
             },
             "Time Series (Daily)": {
+                "2019-02-15": {
+                    "1. open": "13.2900",
+                    "2. high": "13.3400",
+                    "3. low": "13.0600",
+                    "4. close": "13.1400",
+                    "5. volume": "16697600"
+                },
                 "2019-02-14": {
                     "1. open": "13.0900",
-                    "2. high": "13.1700",
+                    "2. high": "13.4000",
                     "3. low": "12.8800",
-                    "4. close": "13.0900",
-                    "5. volume": "15550100"
+                    "4. close": "13.4000",
+                    "5. volume": "27157900"
                 },
                 "2019-02-13": {
                     "1. open": "13.3400",
@@ -740,16 +747,9 @@ http_interactions:
                     "3. low": "9.7400",
                     "4. close": "9.9100",
                     "5. volume": "26401800"
-                },
-                "2018-09-17": {
-                    "1. open": "9.5500",
-                    "2. high": "9.7900",
-                    "3. low": "9.5300",
-                    "4. close": "9.7800",
-                    "5. volume": "14071200"
                 }
             }
         }
     http_version: 
-  recorded_at: Thu, 14 Feb 2019 18:10:59 GMT
+  recorded_at: Fri, 15 Feb 2019 17:30:07 GMT
 recorded_with: VCR 4.0.0
