@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.alphavantage.co/query?apikey=<ALPHA_VANTAGE_API_KEY>&function=TIME_SERIES_DAILY&outputsize=compact&symbol=TEST12.TEST
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - gunicorn/19.7.0
+      Date:
+      - Fri, 15 Feb 2019 17:51:42 GMT
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+      Allow:
+      - GET, HEAD, OPTIONS
+      Vary:
+      - Cookie
+      X-Frame-Options:
+      - SAMEORIGIN
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "Error Message": "Invalid API call. Please retry or visit the documentation (https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY."
+        }
+    http_version: 
+  recorded_at: Thu, 14 Feb 2019 12:30:00 GMT
+recorded_with: VCR 4.0.0
