@@ -10,4 +10,12 @@ class StockExchange < ApplicationRecord
 
   # Validations
   validates :name, :code, :alpha_advantage_code, :country, :timeonze, :open, :close, presence: true
+
+  def b3?
+    code == 'B3'
+  end
+
+  def nyse?
+    code == 'NYSE'
+  end
 end

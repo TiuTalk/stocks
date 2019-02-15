@@ -13,4 +13,8 @@ class Stock < ApplicationRecord
   def alpha_advantage_symbol
     "#{ticker}.#{stock_exchange.alpha_advantage_code}"
   end
+
+  def benchmark
+    Stock.find_by(ticker: 'IBOV11') if stock_exchange.b3?
+  end
 end
