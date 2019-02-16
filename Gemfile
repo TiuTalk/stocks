@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'business'
 gem 'chartkick'
 gem 'coffee-rails', '~> 4.2'
-gem 'jbuilder', '~> 2.5'
+gem 'devise'
 gem 'parallel'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
