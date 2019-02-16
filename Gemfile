@@ -19,6 +19,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'uglifier', '>= 1.3.0'
 
+group :production do
+  gem 'sentry-raven'
+  gem 'skylight'
+end
+
 group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
