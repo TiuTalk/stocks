@@ -1,8 +1,8 @@
 module AlphaVantage
   class ApiKey
     RATE_LIMITS = {
-      4 => 1.minute,
-      400 => 1.day
+      5 => 1.minute,
+      500 => 1.day
     }.freeze
 
     delegate :rate_limit, to: AlphaVantage::Client
