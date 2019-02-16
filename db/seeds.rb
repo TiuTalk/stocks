@@ -15,8 +15,8 @@ if StockExchange.count.zero?
   puts "=> Creating stock exchanges..."
 
   [
-    { name: 'B3', code: 'B3', alpha_advantage_code: 'SAO', country: 'BRA', timeonze: 'America/Sao_Paulo', open: '09:00:00', close: '18:00:00' },
-    # { name: 'NYSE', code: 'NYSE', alpha_advantage_code: 'NYSE', country: 'USA', timeonze: 'America/New_York', open: '09:00:00', close: '18:00:00' }
+    { name: 'B3', code: 'B3', alpha_vantage_code: 'SAO', country: 'BRA', timeonze: 'America/Sao_Paulo', open: '09:00:00', close: '18:00:00' },
+    # { name: 'NYSE', code: 'NYSE', alpha_vantage_code: 'NYSE', country: 'USA', timeonze: 'America/New_York', open: '09:00:00', close: '18:00:00' }
   ].map(&StockExchange.method(:create!))
 
   puts "  - Created #{StockExchange.count} stock exchanges"
@@ -52,8 +52,9 @@ if B3.fiis.count.zero?
 
     ticker = row.children[1].text.strip
     name = row.children[3].text.strip
+    sector = B3.sectors.find_or_create_by(name: row.children[11].text.strip)
 
-    B3.fiis.create!(name: name, ticker: ticker)
+    B3.fiis.create!(name: name, ticker: ticker, sector: sector)
   end
   puts "  - Imported #{B3.fiis.count} #{B3.name} FIIs"
 end

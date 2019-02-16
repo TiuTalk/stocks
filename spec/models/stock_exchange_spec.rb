@@ -9,7 +9,7 @@ RSpec.describe StockExchange, type: :model do
   end
 
   describe 'validations' do
-    %i[name code alpha_advantage_code country timeonze open close].each do |attr|
+    %i[name code alpha_vantage_code country timeonze open close].each do |attr|
       it { is_expected.to validate_presence_of(attr) }
     end
   end

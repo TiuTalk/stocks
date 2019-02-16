@@ -14,8 +14,8 @@ class Stock < ApplicationRecord
   # Constants
   BENCHMARK = 'IBOV11'.freeze
 
-  def alpha_advantage_symbol
-    "#{ticker}.#{stock_exchange.alpha_advantage_code}"
+  def alpha_vantage_symbol
+    "#{ticker}.#{stock_exchange.alpha_vantage_code}"
   end
 
   def benchmark

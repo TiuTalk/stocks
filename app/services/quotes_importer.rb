@@ -42,7 +42,7 @@ class QuotesImporter
 
   def timeseries
     size = date_range.count > 100 ? 'full' : 'compact'
-    AlphaVantage::Client.new.timeseries(stock.alpha_advantage_symbol, outputsize: size)
+    AlphaVantage::Client.new.timeseries(stock.alpha_vantage_symbol, outputsize: size)
   end
 
   def last_year

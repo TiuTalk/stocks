@@ -9,5 +9,5 @@ class StockExchange < ApplicationRecord
   scope :b3, -> { find_by(code: 'B3') }
 
   # Validations
-  validates :name, :code, :alpha_advantage_code, :country, :timeonze, :open, :close, presence: true
+  validates :name, :code, :alpha_vantage_code, :country, :timeonze, :open, :close, presence: true
 end

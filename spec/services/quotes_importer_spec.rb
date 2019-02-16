@@ -17,7 +17,7 @@ RSpec.describe QuotesImporter, type: :service do
     end
 
     context 'with invalid symbol' do
-      let(:exchange) { build(:stock_exchange, alpha_advantage_code: 'TEST') }
+      let(:exchange) { build(:stock_exchange, alpha_vantage_code: 'TEST') }
       let(:stock) { build(:stock, ticker: 'TEST12', stock_exchange: exchange) }
 
       it 'dont create quotes' do

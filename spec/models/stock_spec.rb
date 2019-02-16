@@ -18,10 +18,10 @@ RSpec.describe Stock, type: :model do
     end
   end
 
-  describe '#alpha_advantage_symbol' do
-    it 'combines the StockExchange#alpha_advantage_code with the Stock#ticker' do
+  describe '#alpha_vantage_symbol' do
+    it 'combines the StockExchange#alpha_vantage_code with the Stock#ticker' do
       stock = build(:stock, :itsa4)
-      expect(stock.alpha_advantage_symbol).to eq('ITSA4.SAO')
+      expect(stock.alpha_vantage_symbol).to eq('ITSA4.SAO')
     end
   end
 
