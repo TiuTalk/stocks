@@ -24,7 +24,11 @@ class Stock < ApplicationRecord
 
   def to_chart(range)
     data = quotes.where(date: range).group(:date)
-    { name: name, data: data.sum(:close) }
+    { name: name, data: data.sum(:close), color: color }
   end
+
+  def color
+    hex = Digest::MD5.hexdigest(ticker)[0..5]
+    "##{hex}"
   end
 end
