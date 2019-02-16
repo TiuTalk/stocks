@@ -46,7 +46,7 @@ RSpec.describe Stock, type: :model do
       stock = create(:stock)
       3.times { |i| create(:quote, stock: stock, date: (i + 1).days.ago) }
 
-      result = stock.to_chart
+      result = stock.to_chart(1.week.ago..Time.zone.yesterday)
       expect(result[:name]).to eq(stock.name)
       expect(result[:data].values.sum).to eq(Quote.sum(:close))
     end

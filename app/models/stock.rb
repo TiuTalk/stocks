@@ -22,8 +22,9 @@ class Stock < ApplicationRecord
     ETF.find_by(ticker: self.class::BENCHMARK)
   end
 
-  def to_chart
-    data = quotes.group(:date).order(date: :asc).sum(:close)
-    { name: name, data: data }
+  def to_chart(range)
+    data = quotes.where(date: range).group(:date)
+    { name: name, data: data.sum(:close) }
+  end
   end
 end
