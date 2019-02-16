@@ -24,7 +24,7 @@ class Stock < ApplicationRecord
 
   def to_chart(range)
     data = quotes.where(date: range).group(:date)
-    { name: name, data: data.sum(:close), color: color }
+    { name: ticker, data: data.sum(:close), color: color }
   end
 
   def color
