@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_16_231338) do
+ActiveRecord::Schema.define(version: 2019_02_16_232226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "holdings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "wallet_id"
+    t.uuid "stock_id"
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_holdings_on_stock_id"
+    t.index ["wallet_id"], name: "index_holdings_on_wallet_id"
+  end
 
   create_table "quotes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "stock_id"
@@ -90,6 +100,8 @@ ActiveRecord::Schema.define(version: 2019_02_16_231338) do
     t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
+  add_foreign_key "holdings", "stocks"
+  add_foreign_key "holdings", "wallets"
   add_foreign_key "quotes", "stocks"
   add_foreign_key "sectors", "stock_exchanges"
   add_foreign_key "stocks", "sectors"

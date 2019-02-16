@@ -5,6 +5,8 @@ RSpec.describe Stock, type: :model do
     it { is_expected.to belong_to(:stock_exchange).inverse_of(:stocks) }
     it { is_expected.to belong_to(:sector).inverse_of(:stocks).optional }
     it { is_expected.to have_many(:quotes).inverse_of(:stock).dependent(:destroy) }
+    it { is_expected.to have_many(:holdings).inverse_of(:stock).dependent(:destroy) }
+    it { is_expected.to have_many(:wallets).through(:holdings).inverse_of(:stocks) }
   end
 
   describe 'validations' do
