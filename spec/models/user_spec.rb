@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'associations' do
-    xit { is_expected.to have_many(:wallets).inverse_of(:user).dependent(:destroy) }
+    it { is_expected.to have_many(:wallets).inverse_of(:user).dependent(:destroy) }
   end
 
   describe 'validations' do

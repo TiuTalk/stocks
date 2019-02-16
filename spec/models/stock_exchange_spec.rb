@@ -6,6 +6,7 @@ RSpec.describe StockExchange, type: :model do
     it { is_expected.to have_many(:stocks).inverse_of(:stock_exchange).dependent(:destroy) }
     it { is_expected.to have_many(:fiis).class_name('FII').inverse_of(:stock_exchange).dependent(:destroy) }
     it { is_expected.to have_many(:etfs).class_name('ETF').inverse_of(:stock_exchange).dependent(:destroy) }
+    it { is_expected.to have_many(:wallets).inverse_of(:stock_exchange).dependent(:destroy) }
   end
 
   describe 'validations' do
