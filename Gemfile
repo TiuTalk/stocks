@@ -21,7 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :production do
   gem 'sentry-raven'
-  gem 'skylight'
+  gem 'skylight', '4.0.0.beta'
 end
 
 group :development, :test do
