@@ -25,7 +25,7 @@ end
 B3 = StockExchange.b3
 
 if B3.stocks.count.zero?
-  b3_regex = %r{-([A-Z0-9]{4}[0-9]{1,2}B?)/cotacao}
+  b3_regex = %r{-([A-Z0-9]{4}[0-9]{1,2})/cotacao}
   puts "=> Importing #{B3.name} stocks..."
   ('A'..'Z').each do |letter|
     puts "  - Importing stocks with letter #{letter}..."
@@ -54,7 +54,7 @@ if B3.fiis.count.zero?
     name = row.children[3].text.strip
     sector = B3.sectors.find_or_create_by(name: row.children[11].text.strip)
 
-    B3.fiis.create!(name: name, ticker: ticker, sector: sector)
+    B3.fiis.create(name: name, ticker: ticker, sector: sector)
   end
   puts "  - Imported #{B3.fiis.count} #{B3.name} FIIs"
 end
@@ -62,13 +62,20 @@ end
 if B3.etfs.count.zero?
   puts "=> Importing #{B3.name} ETFs..."
   doc = fetch_url('https://br.investing.com/etfs/brazil-etfs')
+  sector = B3.sectors.find_or_create_by(name: 'Fundo de Ações')
   doc.css('#etfs tr').each_with_index do |row, i|
     next if i.zero?
 
     ticker = row.children[2].text.strip
     name = row.children[1].text.strip
 
-    B3.etfs.create(name: name, ticker: ticker)
+    B3.etfs.create(name: name, ticker: ticker, sector: sector)
   end
   puts "  - Imported #{B3.etfs.count} #{B3.name} ETFs"
 end
+
+# Fix some failed imports
+sector = B3.sectors.find_or_create_by(name: 'Fundo de Ações')
+Stock.find_by(ticker: 'IBOV11')&.update(type: 'ETF', sector: sector)
+Stock.find_by(ticker: 'IFIX11')&.update(type: 'ETF', sector: sector)
+Stock.where.not('ticker ~* ?', '[A-Z]{4}[0-9]{1,2}').delete_all
