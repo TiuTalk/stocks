@@ -8,4 +8,7 @@ FactoryBot.define do
     total { price + taxes }
     date { 1.day.ago }
   end
+
+  factory :buy, parent: :operation, class: 'Operations::Buy'
+  factory :sell, parent: :operation, class: 'Operations::Sell'
 end
