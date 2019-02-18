@@ -12,8 +12,8 @@ FactoryBot.define do
 
   factory :fii, parent: :stock, class: 'FII'
   factory :etf, parent: :stock, class: 'ETF' do
-    trait :ibov11 do
-      ticker { 'IBOV11' }
+    trait :bova11 do
+      ticker { 'BOVA11' }
       stock_exchange { StockExchange.b3.presence || create(:stock_exchange, :b3) }
     end
 

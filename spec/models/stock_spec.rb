@@ -31,10 +31,10 @@ RSpec.describe Stock, type: :model do
     context 'B3' do
       let(:b3) { create(:stock_exchange, :b3) }
       let!(:stock) { create(:stock, stock_exchange: b3) }
-      let!(:ibov11) { create(:etf, :ibov11) }
+      let!(:bova11) { create(:etf, :bova11) }
 
-      it 'returns IBOV11' do
-        expect(stock.benchmark).to eq(ibov11)
+      it 'returns BOVA11' do
+        expect(stock.benchmark).to eq(bova11)
       end
     end
 

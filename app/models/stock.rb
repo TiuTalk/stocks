@@ -14,7 +14,7 @@ class Stock < ApplicationRecord
   validates :ticker, uniqueness: { scope: :stock_exchange_id }
 
   # Constants
-  BENCHMARK = 'IBOV11'.freeze
+  BENCHMARK = 'BOVA11'.freeze
 
   def alpha_vantage_symbol
     "#{ticker}.#{stock_exchange.alpha_vantage_code}"
