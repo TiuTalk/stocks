@@ -1,4 +1,4 @@
 module Operations
-  class Buy < Operation
+  class Sale < Operation
   end
 end

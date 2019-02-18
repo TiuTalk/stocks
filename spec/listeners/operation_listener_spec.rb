@@ -4,9 +4,9 @@ RSpec.describe OperationListener, type: :listener do
   let(:stock) { create(:stock) }
 
   describe '#after_create' do
-    context 'with Buy operation' do
+    context 'with Purchase operation' do
       it 'creates the Holding record' do
-        operation = build(:buy, stock: stock, quantity: 50)
+        operation = build(:purchase, stock: stock, quantity: 50)
 
         expect do
           operation.save!
@@ -19,8 +19,8 @@ RSpec.describe OperationListener, type: :listener do
       end
 
       it 'updates the existing Holding record' do
-        previous_operation = create(:buy, stock: stock, quantity: 50)
-        operation = build(:buy, stock: stock, wallet: previous_operation.wallet, quantity: 30)
+        previous_operation = create(:purchase, stock: stock, quantity: 50)
+        operation = build(:purchase, stock: stock, wallet: previous_operation.wallet, quantity: 30)
 
         expect do
           operation.save!
@@ -33,9 +33,9 @@ RSpec.describe OperationListener, type: :listener do
       end
     end
 
-    context 'with Sell operation' do
+    context 'with Sale operation' do
       it 'creates the Holding record' do
-        operation = build(:sell, stock: stock, quantity: 50)
+        operation = build(:sale, stock: stock, quantity: 50)
 
         expect do
           operation.save!
@@ -48,8 +48,8 @@ RSpec.describe OperationListener, type: :listener do
       end
 
       it 'updates the existing Holding record' do
-        previous_operation = create(:buy, stock: stock, quantity: 50)
-        operation = build(:sell, stock: stock, wallet: previous_operation.wallet, quantity: 30)
+        previous_operation = create(:purchase, stock: stock, quantity: 50)
+        operation = build(:sale, stock: stock, wallet: previous_operation.wallet, quantity: 30)
 
         expect do
           operation.save!
@@ -65,7 +65,7 @@ RSpec.describe OperationListener, type: :listener do
 
   describe '#after_update' do
     it 'recalculates holding' do
-      operation = build(:buy, stock: stock, quantity: 50)
+      operation = build(:purchase, stock: stock, quantity: 50)
 
       expect do
         operation.save!
@@ -87,8 +87,8 @@ RSpec.describe OperationListener, type: :listener do
   describe '#after_destroy' do
     context 'with remaining holdings' do
       it 'keep the Holding record' do
-        previous_operation = create(:buy, stock: stock, quantity: 10)
-        operation = create(:buy, stock: stock, wallet: previous_operation.wallet, quantity: 5)
+        previous_operation = create(:purchase, stock: stock, quantity: 10)
+        operation = create(:purchase, stock: stock, wallet: previous_operation.wallet, quantity: 5)
 
         expect(Holding.last.quantity).to eq(10 + 5)
 
@@ -102,7 +102,7 @@ RSpec.describe OperationListener, type: :listener do
 
     context 'without remaining holdings' do
       it 'deletes the Holding record' do
-        operation = create(:buy, stock: stock, quantity: 5)
+        operation = create(:purchase, stock: stock, quantity: 5)
 
         expect do
           operation.destroy!

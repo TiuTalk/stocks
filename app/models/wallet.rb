@@ -5,8 +5,8 @@ class Wallet < ApplicationRecord
   has_many :holdings, inverse_of: :wallet, dependent: :destroy
   has_many :stocks, through: :holdings, inverse_of: :wallets
   has_many :operations, inverse_of: :wallet, dependent: :destroy
-  has_many :purchases, class_name: 'Operations::Buy', inverse_of: :wallet, dependent: :destroy
-  has_many :sales, class_name: 'Operations::Sell', inverse_of: :wallet, dependent: :destroy
+  has_many :purchases, class_name: 'Operations::Purchase', inverse_of: :wallet, dependent: :destroy
+  has_many :sales, class_name: 'Operations::Sale', inverse_of: :wallet, dependent: :destroy
 
   # Validations
   validates :name, presence: true

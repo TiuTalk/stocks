@@ -9,6 +9,6 @@ FactoryBot.define do
     date { 1.day.ago }
   end
 
-  factory :buy, parent: :operation, class: 'Operations::Buy'
-  factory :sell, parent: :operation, class: 'Operations::Sell'
+  factory :purchase, parent: :operation, class: 'Operations::Purchase'
+  factory :sale, parent: :operation, class: 'Operations::Sale'
 end
