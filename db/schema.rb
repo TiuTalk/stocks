@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_18_030322) do
+ActiveRecord::Schema.define(version: 2019_02_18_220042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -19,9 +19,12 @@ ActiveRecord::Schema.define(version: 2019_02_18_030322) do
   create_table "holdings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "wallet_id"
     t.uuid "stock_id"
-    t.integer "quantity", default: 1, null: false
+    t.integer "quantity", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "invested", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "average_price", precision: 6, scale: 2, default: "0.0", null: false
+    t.decimal "accounting_average_price", precision: 6, scale: 2, default: "0.0", null: false
     t.index ["stock_id"], name: "index_holdings_on_stock_id"
     t.index ["wallet_id"], name: "index_holdings_on_wallet_id"
   end
@@ -31,9 +34,9 @@ ActiveRecord::Schema.define(version: 2019_02_18_030322) do
     t.uuid "stock_id"
     t.string "type"
     t.integer "quantity", null: false
-    t.decimal "price", precision: 6, scale: 2, null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
     t.decimal "taxes", precision: 6, scale: 2, default: "0.0", null: false
-    t.decimal "total", precision: 6, scale: 2, null: false
+    t.decimal "total", precision: 10, scale: 2, null: false
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
