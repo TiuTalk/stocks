@@ -5,7 +5,7 @@ FactoryBot.define do
     quantity { 1 }
     price { rand(1..10.0) }
     taxes { 1.49 }
-    total { price + taxes }
+    total { (quantity * price) + taxes }
     date { 1.day.ago }
   end
 

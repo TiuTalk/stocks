@@ -1,1 +1,1 @@
-Operation.subscribe(OperationListener.new)
+Wisper.subscribe(OperationListener.new, scope: Operation)
