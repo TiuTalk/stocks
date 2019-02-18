@@ -7,6 +7,11 @@ RSpec.describe QuotesImporter, type: :service do
   let(:itsa4) { create(:stock, :itsa4) }
   let(:since) { 1.week.ago.to_date }
 
+  before do
+    key = AlphaVantage::ApiKey.new(ENV['ALPHA_VANTAGE_API_KEYS'].split('|').first)
+    allow(AlphaVantage::ApiKey).to receive(:find_available).and_return(key)
+  end
+
   describe '#call', vcr: true do
     it 'import quotes since the date' do
       expect do

@@ -8,15 +8,10 @@ RSpec.describe AlphaVantage::ApiKey, type: :service do
 
     subject(:key) { described_class.find_available }
 
-    it 'returns an API key that has not being used too much' do
-      expect(key.to_s).to eq('A')
-    end
-
     it 'returns the next API key available' do
       current_key = key
-      expect do
-        5.times { current_key.use }
-      end.to change { described_class.find_available.to_s }.from(current_key.to_s).to('B')
+      5.times { current_key.use }
+      expect(described_class.find_available).to_not eq(current_key)
     end
   end
 

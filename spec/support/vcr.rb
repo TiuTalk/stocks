@@ -6,6 +6,6 @@ VCR.configure do |config|
   config.configure_rspec_metadata!
 
   ENV.fetch('ALPHA_VANTAGE_API_KEYS', '').split('|').each do |key|
-    config.filter_sensitive_data('<ALPHA_VANTAGE_API_KEY>') { key } if key.present?
+    config.filter_sensitive_data('<ALPHA_VANTAGE_API_KEY>') { key }
   end
 end

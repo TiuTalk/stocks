@@ -8,7 +8,7 @@ module AlphaVantage
     delegate :rate_limit, to: AlphaVantage::Client
 
     def self.find_available
-      api_keys.find(&:available?) || raise(MissingAvailableKey)
+      api_keys.shuffle.find(&:available?) || raise(MissingAvailableKey)
     end
 
     def self.api_keys

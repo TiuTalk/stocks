@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe AlphaVantage::Client, type: :service do
+  before do
+    key = AlphaVantage::ApiKey.new(ENV['ALPHA_VANTAGE_API_KEYS'].split('|').first)
+    allow(AlphaVantage::ApiKey).to receive(:find_available).and_return(key)
+  end
+
   describe '#timeseries', vcr: true do
     subject(:client) { described_class.new }
 
