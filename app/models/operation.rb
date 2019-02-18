@@ -1,4 +1,6 @@
 class Operation < ApplicationRecord
+  include Wisper.model
+
   # Associations
   belongs_to :wallet, inverse_of: :operations
   belongs_to :stock, inverse_of: :operations
