@@ -25,7 +25,13 @@ class OperationListener
   end
 
   def recalculate_holding
-    holding.update!(quantity: purchases_total - sales_total)
+    total = purchases_total - sales_total
+
+    if total.zero?
+      holding.destroy!
+    else
+      holding.update!(quantity: total)
+    end
   end
 
   def purchases_total
