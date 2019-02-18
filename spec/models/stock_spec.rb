@@ -7,6 +7,7 @@ RSpec.describe Stock, type: :model do
     it { is_expected.to have_many(:quotes).inverse_of(:stock).dependent(:destroy) }
     it { is_expected.to have_many(:holdings).inverse_of(:stock).dependent(:destroy) }
     it { is_expected.to have_many(:wallets).through(:holdings).inverse_of(:stocks) }
+    it { is_expected.to have_many(:operations).inverse_of(:stock) }
   end
 
   describe 'validations' do
