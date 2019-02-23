@@ -6,6 +6,7 @@ class Stock < ApplicationRecord
   has_many :holdings, inverse_of: :stock, dependent: :destroy
   has_many :wallets, through: :holdings, inverse_of: :stocks
   has_many :operations, inverse_of: :stock, dependent: :destroy
+  has_one :quote, -> { order(date: :desc) }, inverse_of: :stock
 
   # Scopes
   scope :enabled, -> { where(enabled: true) }

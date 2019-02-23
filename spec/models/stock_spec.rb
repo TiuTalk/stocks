@@ -8,6 +8,17 @@ RSpec.describe Stock, type: :model do
     it { is_expected.to have_many(:holdings).inverse_of(:stock).dependent(:destroy) }
     it { is_expected.to have_many(:wallets).through(:holdings).inverse_of(:stocks) }
     it { is_expected.to have_many(:operations).inverse_of(:stock) }
+    it { is_expected.to have_one(:quote).inverse_of(:stock) }
+
+    describe '#quote' do
+      let!(:stock) { create_default(:stock) }
+      let!(:quote_a) { create(:quote, date: 3.days.ago) }
+      let!(:quote_b) { create(:quote, date: 2.days.ago) }
+
+      it 'returns the latest quote' do
+        expect(stock.quote).to eq(quote_b)
+      end
+    end
   end
 
   describe 'validations' do
