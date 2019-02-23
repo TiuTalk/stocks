@@ -27,6 +27,9 @@ module Acoes
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.eager_load_paths += %W(#{config.root}/presenters)
+    config.eager_load_paths += %W(#{config.root}/nulls)
+
     # Don't generate system test files.
     config.generators.system_tests = nil
 
