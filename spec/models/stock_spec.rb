@@ -32,6 +32,28 @@ RSpec.describe Stock, type: :model do
     end
   end
 
+  describe 'scopes' do
+    describe '#enabled' do
+      it 'returns only stocks that are enabled' do
+        stock_a = create(:stock, enabled: true)
+        _stock_b = create(:stock, enabled: false)
+        create(:holding, stock: stock_a)
+
+        expect(described_class.unscoped.enabled).to eq([stock_a])
+      end
+    end
+
+    describe '#with_holdings' do
+      it 'returns only stocks with holdings' do
+        stock_a = create(:stock)
+        _stock_b = create(:stock)
+        create(:holding, stock: stock_a)
+
+        expect(described_class.unscoped.with_holdings).to eq([stock_a])
+      end
+    end
+  end
+
   describe '#alpha_vantage_symbol' do
     it 'combines the StockExchange#alpha_vantage_code with the Stock#ticker' do
       stock = build(:stock, :itsa4)

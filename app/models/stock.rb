@@ -10,6 +10,7 @@ class Stock < ApplicationRecord
 
   # Scopes
   scope :enabled, -> { where(enabled: true) }
+  scope :with_holdings, -> { joins(:holdings).distinct }
 
   # Validations
   validates :name, :ticker, :stock_exchange, presence: true
