@@ -9,7 +9,6 @@ gem 'alphavantagerb'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'business'
 gem 'chartkick'
-gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'parallel'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -19,6 +18,7 @@ gem 'ratelimit'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq'
 gem 'uglifier', '>= 1.3.0'
+gem 'webpacker', '~> 3.5'
 gem 'wisper-activerecord'
 
 group :production do
