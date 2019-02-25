@@ -9,6 +9,7 @@ class Operation < ApplicationRecord
   scope :purchase, -> { where(type: 'Operations::Purchase') }
   scope :sale, -> { where(type: 'Operations::Sale') }
   scope :purchase_or_sale, -> { purchase.or(sale) }
+  scope :on_or_before, ->(date) { where("#{table_name}.date <= ?", date) }
 
   # Validations
   validates :quantity, :price, :total, :date, presence: true

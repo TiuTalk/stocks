@@ -2,6 +2,9 @@ class Quote < ApplicationRecord
   # Associations
   belongs_to :stock, inverse_of: :quotes
 
+  # Scopes
+  scope :on_or_before, ->(date) { where("#{table_name}.date <= ?", date) }
+
   # Validations
   validates :stock, :date, presence: true
   validates :date, uniqueness: { scope: :stock_id }
