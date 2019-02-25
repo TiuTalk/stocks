@@ -10,6 +10,10 @@ class WalletHistoryCalculator
     new(wallet, date).call
   end
 
+  def self.call_async(wallet, date)
+    WalletHistoryCalculatorWorker.perform_async(wallet.id, date)
+  end
+
   def call
     if invested.zero?
       history.destroy!

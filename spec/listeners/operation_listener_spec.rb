@@ -5,16 +5,18 @@ RSpec.describe OperationListener, type: :listener do
   let!(:wallet) { create_default(:wallet) }
 
   describe '#after_create' do
-    it 'calls HoldingCalculator' do
+    it 'calls HoldingCalculator and WalletHistoryCalculator' do
       expect(HoldingCalculator).to receive(:call_async).with(wallet, stock)
+      expect(WalletHistoryCalculator).to receive(:call_async).with(wallet, an_instance_of(Date)).twice
       create(:purchase, quantity: 50)
     end
   end
 
   describe '#after_update' do
-    it 'calls HoldingCalculator' do
+    it 'calls HoldingCalculator and WalletHistoryCalculator' do
       operation = create(:purchase, quantity: 50)
       expect(HoldingCalculator).to receive(:call_async).with(wallet, stock)
+      expect(WalletHistoryCalculator).to receive(:call_async).with(wallet, an_instance_of(Date)).twice
       operation.update(quantity: 10)
     end
   end
