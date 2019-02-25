@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_18_220042) do
+ActiveRecord::Schema.define(version: 2019_02_25_032305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -108,6 +108,18 @@ ActiveRecord::Schema.define(version: 2019_02_18_220042) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wallet_histories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "wallet_id"
+    t.decimal "invested", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "decimal", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "value", precision: 10, scale: 2, default: "0.0", null: false
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wallet_id", "date"], name: "index_wallet_histories_on_wallet_id_and_date", unique: true
+    t.index ["wallet_id"], name: "index_wallet_histories_on_wallet_id"
+  end
+
   create_table "wallets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "stock_exchange_id"
@@ -126,6 +138,7 @@ ActiveRecord::Schema.define(version: 2019_02_18_220042) do
   add_foreign_key "sectors", "stock_exchanges"
   add_foreign_key "stocks", "sectors"
   add_foreign_key "stocks", "stock_exchanges"
+  add_foreign_key "wallet_histories", "wallets"
   add_foreign_key "wallets", "stock_exchanges"
   add_foreign_key "wallets", "users"
 end
