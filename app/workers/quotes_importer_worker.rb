@@ -1,6 +1,8 @@
 class QuotesImporterWorker
   include Sidekiq::Worker
 
+  sidekiq_options lock: :until_executed
+
   def perform(stock_id)
     stock = Stock.find(stock_id)
 
