@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe WalletPresenter, type: :presenter do
+RSpec.describe WalletPresenter, type: :presenter, sidekiq: :inline do
   subject(:presenter) { described_class.new(wallet) }
 
   let!(:wallet) { create_default(:wallet) }

@@ -8,6 +8,10 @@ class HoldingCalculator
     new(wallet, stock).call
   end
 
+  def self.call_async(wallet, stock)
+    HoldingCalculatorWorker.perform_async(wallet.id, stock.id)
+  end
+
   def call
     if quantity.zero?
       holding.destroy!

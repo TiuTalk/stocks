@@ -14,6 +14,6 @@ class OperationListener
   private
 
   def recalculate_holding(operation)
-    HoldingCalculator.call(operation.wallet, operation.stock)
+    HoldingCalculator.call_async(operation.wallet, operation.stock)
   end
 end

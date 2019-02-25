@@ -6,7 +6,7 @@ RSpec.describe OperationListener, type: :listener do
 
   describe '#after_create' do
     it 'calls HoldingCalculator' do
-      expect(HoldingCalculator).to receive(:call).with(wallet, stock)
+      expect(HoldingCalculator).to receive(:call_async).with(wallet, stock)
       create(:purchase, quantity: 50)
     end
   end
@@ -14,12 +14,12 @@ RSpec.describe OperationListener, type: :listener do
   describe '#after_update' do
     it 'calls HoldingCalculator' do
       operation = create(:purchase, quantity: 50)
-      expect(HoldingCalculator).to receive(:call).with(wallet, stock)
+      expect(HoldingCalculator).to receive(:call_async).with(wallet, stock)
       operation.update(quantity: 10)
     end
   end
 
-  describe '#after_destroy' do
+  describe '#after_destroy', sidekiq: :inline do
     context 'with remaining holdings' do
       it 'keep the Holding record' do
         create(:purchase, quantity: 10)
