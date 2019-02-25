@@ -2,7 +2,9 @@ class QuoteImporterWorker
   include Sidekiq::Worker
 
   def perform(stock_id, quote = {})
+    quote.symbolize_keys!
     stock = Stock.find(stock_id)
-    stock.quotes.find_or_create_by!(quote)
+    record = stock.quotes.find_or_initialize_by(date: quote[:date])
+    record.update!(quote)
   end
 end

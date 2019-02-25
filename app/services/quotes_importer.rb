@@ -9,7 +9,8 @@ class QuotesImporter
 
     Parallel.each(quotes, in_threads: 5) do |quote|
       ActiveRecord::Base.connection_pool.with_connection do
-        stock.quotes.find_or_create_by!(quote)
+        record = stock.quotes.find_or_initialize_by(date: quote[:date])
+        record.update!(quote)
       end
     end
   end
