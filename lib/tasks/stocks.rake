@@ -1,8 +1,15 @@
 namespace :stocks do
-  desc 'Import quotes'
+  desc 'Import quotes of enabled Stocks'
   task import_quotes: :environment do
-    StockExchange.b3.stocks.enabled.find_each do |s|
-      QuotesImporterWorker.perform_async(s.id)
+    Stock.enabled.find_each do |stock|
+      QuotesImporterWorker.perform_async(stock.id)
+    end
+  end
+
+  desc 'Import quotes of enabled Stocks with holdings'
+  task import_holdings_quotes: :environment do
+    Stock.enabled.with_holdings.find_each do |stock|
+      QuotesImporterWorker.perform_async(stock.id)
     end
   end
 end
