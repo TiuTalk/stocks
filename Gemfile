@@ -8,7 +8,6 @@ gem 'administrate'
 gem 'alphavantagerb'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'business'
-gem 'chartkick'
 gem 'devise'
 gem 'parallel'
 gem 'pg', '>= 0.18', '< 2.0'

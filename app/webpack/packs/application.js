@@ -7,11 +7,3 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import '../stylesheets/application.scss';
-
-import Chartkick from 'chartkick';
-
-// for Chart.js
-import Chart from 'chart.js';
-
-window.Chartkick = Chartkick;
-Chartkick.addAdapter(Chart);

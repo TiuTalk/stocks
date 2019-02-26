@@ -27,13 +27,8 @@ class Stock < ApplicationRecord
     ETF.find_by(ticker: self.class::BENCHMARK)
   end
 
-  def to_chart(range)
-    data = quotes.where(date: range).group(:date)
-    { name: ticker, data: data.sum(:close), color: color }
-  end
-
-  def color
-    hex = Digest::MD5.hexdigest(ticker)[0..5]
-    "##{hex}"
-  end
+  # def color
+  #   hex = Digest::MD5.hexdigest(ticker)[0..5]
+  #   "##{hex}"
+  # end
 end
