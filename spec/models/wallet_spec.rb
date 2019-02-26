@@ -9,7 +9,6 @@ RSpec.describe Wallet, type: :model do
     it { is_expected.to have_many(:operations).inverse_of(:wallet).dependent(:destroy) }
     it { is_expected.to have_many(:purchases).class_name('Operations::Purchase').inverse_of(:wallet).dependent(:destroy) }
     it { is_expected.to have_many(:sales).class_name('Operations::Sale').inverse_of(:wallet).dependent(:destroy) }
-    it { is_expected.to have_many(:history).class_name('WalletHistory').inverse_of(:wallet).dependent(:destroy) }
   end
 
   describe 'validations' do
