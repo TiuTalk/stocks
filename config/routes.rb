@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :stocks, only: %w[show]
+  resources :wallets, only: %w[show]
 
   namespace :admin do
     root to: "users#index"

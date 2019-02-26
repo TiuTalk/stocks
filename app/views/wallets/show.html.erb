@@ -1,0 +1,8 @@
+<% content_for(:head) do %>
+  <%= javascript_pack_tag 'wallet_report' %>
+<% end %>
+
+<%= content_tag(:h1, @wallet.name) %>
+
+<%= content_tag(:div, nil, id: 'wallet-report-container', data: @report.data.to_json) %>
+
