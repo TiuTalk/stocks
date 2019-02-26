@@ -28,6 +28,12 @@ class BaseReport
     1.year.ago.to_date..Time.zone.yesterday
   end
 
+  def cache(keys, options = { expires_in: 1.hour })
+    Rails.cache.fetch(cache_key(keys), options) do
+      yield
+    end
+  end
+
   def cache_key(*parts)
     parts.map! { |part| part.try(:cache_key) || part }
     parts.join('/')

@@ -27,7 +27,7 @@ class WalletReport < BaseReport
   def invested_until_date(date)
     return 0 if date < date_range.begin
 
-    Rails.cache.fetch(cache_key(wallet, :invested_until_date, date), expires_in: 1.hour) do
+    cache([wallet, :invested_until_date, date]) do
       invested_until_date(date - 1.day) + invested_on_date(date)
     end
   end
@@ -45,7 +45,7 @@ class WalletReport < BaseReport
   def stock_quantity_on_date(stock, date)
     return 0 if date < date_range.begin
 
-    Rails.cache.fetch(cache_key(wallet, :stock_quantity_on_date, stock, date), expires_in: 1.hour) do
+    cache([wallet, :stock_quantity_on_date, stock, date]) do
       stock_quantity_on_date(stock, date - 1.day) +
         stock_purchased_quantity_on_date(stock, date) -
         stock_sold_quantity_on_date(stock, date)
@@ -90,4 +90,3 @@ class WalletReport < BaseReport
     end
   end
 end
-
