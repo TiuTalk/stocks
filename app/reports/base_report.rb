@@ -1,22 +1,34 @@
 class BaseReport
   CDI = ENV.fetch('CDI', 6.4).to_f
 
-  def initialize(date_range: default_date_range, interval: 1.week, date_format: :short)
+  def initialize(date_range: default_date_range, interval: :monthly)
     @date_range = date_range
-    @interval = (interval / 1.day).to_i
-    @date_format = date_format
+    @interval = interval
   end
 
   private
 
-  attr_reader :date_range, :interval
+  attr_reader :date_range
 
   def each_date(cdi: false)
-    date_range.step(interval).map do |date|
-      row = { date: I18n.l(date, format: @date_format) }
+    dates.map do |date|
+      row = { date: I18n.l(date, format: date_format) }
       row[:cdi] = cdi_return(from: date_range.begin, to: date) if cdi
+
       yield(date, row)
     end.compact
+  end
+
+  def dates
+    list = []
+    date = beginning_of_report
+
+    while date.past?
+      list << date
+      date = advance_date(date)
+    end
+
+    list
   end
 
   def cdi_return(from:, to:)
@@ -37,5 +49,22 @@ class BaseReport
   def cache_key(*parts)
     parts.map! { |part| part.try(:cache_key) || part }
     parts.join('/')
+  end
+
+  def monthly?
+    @interval == :monthly
+  end
+
+  def beginning_of_report
+    date = date_range.begin
+    monthly? ? date.end_of_month : date.end_of_week
+  end
+
+  def advance_date(date)
+    monthly? ? date.next_month.end_of_month : date.next_week.end_of_week
+  end
+
+  def date_format
+    monthly? ? '%b/%y' : '%d/%b/%y'
   end
 end

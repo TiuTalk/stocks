@@ -19,7 +19,7 @@ RSpec.describe WalletReport, type: :report do
     end
   end
 
-  subject(:report) { described_class.new(wallet) }
+  subject(:report) { described_class.new(wallet, interval: :weekly) }
 
   describe '#data' do
     it 'include an item for each week between first purchase and yesterday' do

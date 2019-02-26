@@ -1,6 +1,6 @@
 class WalletReport < BaseReport
   def initialize(wallet, options = {})
-    super(options)
+    super(options.symbolize_keys)
 
     @wallet = wallet
     @operations = wallet.operations.includes(:stock).where(date: date_range).order(date: :asc)
