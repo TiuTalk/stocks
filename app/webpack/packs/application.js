@@ -6,12 +6,12 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import 'stylesheets/application'
+import '../stylesheets/application.scss';
 
-import Chartkick from "chartkick";
-window.Chartkick = Chartkick;
+import Chartkick from 'chartkick';
 
 // for Chart.js
-import Chart from "chart.js";
-Chartkick.addAdapter(Chart);
+import Chart from 'chart.js';
 
+window.Chartkick = Chartkick;
+Chartkick.addAdapter(Chart);

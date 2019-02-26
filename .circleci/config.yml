@@ -27,6 +27,13 @@ jobs:
             - ~/.cache/yarn
       # ==============================
 
+      # ESlint
+      # ==============================
+      - run:
+          name: ESlint
+          command: yarn run eslint .
+      # ==============================
+
       # Ruby dependencies
       # ==============================
       - restore_cache:
@@ -52,6 +59,7 @@ jobs:
       - run:
           name: RuboCop
           command: bundle exec rubocop
+      # ==============================
 
       - run:
           name: Wait for DB
