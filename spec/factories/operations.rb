@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :operation do
     wallet
     stock
-    quantity { 1 }
+    quantity { rand(1..100) }
     price { rand(1..10.0) }
     taxes { 1.49 }
     total { (quantity * price) + taxes }
