@@ -30,24 +30,24 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails'
   gem 'rspec_junit_formatter'
   gem 'rubocop', require: false
 end
 
 group :development do
   gem 'bundler-audit'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
 end
 
 group :test do
   gem 'climate_control'
   gem 'fakeredis'
   gem 'rails-controller-testing'
-  gem 'shoulda-matchers', '4.0.0'
+  gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'test-prof'
   gem 'vcr', require: false
