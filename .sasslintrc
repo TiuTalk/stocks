@@ -1,0 +1,7 @@
+files:
+  include:
+    - 'app/assets/**/*.s+(a|c)ss'
+    - 'vendor/assets/**/*.s+(a|c)ss'
+    - 'app/webpack/**/*.s+(a|c)ss'
+  ignore:
+    - 'node_modules/**/*'
