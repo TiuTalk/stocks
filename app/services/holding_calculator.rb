@@ -1,7 +1,7 @@
 class HoldingCalculator
   def initialize(wallet, stock)
     @holding = wallet.holdings.find_or_initialize_by(stock: stock)
-    @operations = wallet.operations.purchase_or_sale.where(stock: stock)
+    @operations = wallet.operations.where(stock: stock)
   end
 
   def self.call(wallet, stock)
@@ -14,15 +14,13 @@ class HoldingCalculator
 
   def call
     if quantity.zero?
-      holding.destroy!
+      @holding.destroy!
     else
-      holding.update!(attributes)
+      @holding.update!(attributes)
     end
   end
 
   private
-
-  attr_reader :holding, :operations
 
   def attributes
     { quantity: quantity,
@@ -32,15 +30,7 @@ class HoldingCalculator
   end
 
   def quantity
-    purchases.sum(&:quantity) - sales.sum(&:quantity)
-  end
-
-  def purchases
-    operations.select { |operation| operation.is_a?(Operations::Purchase) }
-  end
-
-  def sales
-    operations.select { |operation| operation.is_a?(Operations::Sale) }
+    @operations.purchase_or_sale.sum(:quantity)
   end
 
   def average_price
@@ -48,10 +38,10 @@ class HoldingCalculator
   end
 
   def accounting_average_price
-    purchases.sum(&:total) / purchases.sum(&:quantity)
+    @operations.purchase.sum(:total) / @operations.purchase.sum(:quantity)
   end
 
   def invested
-    purchases.sum(&:total) - sales.sum(&:total)
+    @operations.purchase_or_sale.sum(:total)
   end
 end

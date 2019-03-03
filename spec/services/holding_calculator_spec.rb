@@ -30,11 +30,11 @@ RSpec.describe HoldingCalculator, type: :service do
     expect(holding.accounting_average_price).to eq(17.2)
     expect(holding.invested).to eq(3475.98 + operation.total)
 
-    operation = create(:sale, quantity: 50, price: 17.0, taxes: 1.49)
+    operation = create(:sale, quantity: -50, price: 17.0, taxes: 1.49)
     described_class.call(wallet, stock)
     expect(holding.reload.quantity).to eq(182)
-    expect(holding.average_price).to eq(17.24) # TODO: Check this!
+    expect(holding.average_price).to eq(17.26) # TODO: Check this!
     expect(holding.accounting_average_price).to eq(17.2) # Doesn't change with sales
-    expect(holding.invested).to eq(3989.47 - operation.total)
+    expect(holding.invested).to eq(3989.47 + operation.total)
   end
 end

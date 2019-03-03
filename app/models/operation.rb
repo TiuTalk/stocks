@@ -13,6 +13,18 @@ class Operation < ApplicationRecord
 
   # Validations
   validates :quantity, :price, :total, :date, presence: true
-  validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :price, :taxes, :total, numericality: { greater_than_or_equal_to: 0 }
+  validates :quantity, numericality: { only_integer: true, other_than: 0 }
+  validates :price, :taxes, numericality: { greater_than_or_equal_to: 0 }
+  validates :total, numericality: { other_than: 0 }
+
+  # Callbacks
+  before_validation :calculate_total
+
+  private
+
+  def calculate_total
+    return if quantity.nil? || price.nil?
+
+    self.total = (quantity * price) + taxes
+  end
 end

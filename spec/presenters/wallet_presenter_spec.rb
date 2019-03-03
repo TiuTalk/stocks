@@ -8,9 +8,9 @@ RSpec.describe WalletPresenter, type: :presenter, sidekiq: :inline do
   let(:stock_b) { create(:stock) }
 
   before do
-    create(:purchase, stock: stock_a, quantity: 10, total: 12.5)
-    create(:purchase, stock: stock_b, quantity: 20, total: 123.13)
-    create(:sale, stock: stock_b, quantity: 5, total: 48.13)
+    create(:purchase, stock: stock_a, quantity: 10, price: 12.5, taxes: 0)
+    create(:purchase, stock: stock_b, quantity: 20, price: 6.15, taxes: 0)
+    create(:sale, stock: stock_b, quantity: -5, price: 3.51, taxes: 0)
 
     allow(wallet).to receive_message_chain(:stocks, :includes).and_return([stock_a, stock_b])
     allow(stock_a).to receive(:quote).and_return(double(Quote, close: 23.54))
@@ -19,7 +19,7 @@ RSpec.describe WalletPresenter, type: :presenter, sidekiq: :inline do
 
   describe '#total_invested' do
     it 'returns the sum of all wallet holdings investments' do
-      expect(presenter.total_invested).to eq(12.5 + 123.13 - 48.13)
+      expect(presenter.total_invested).to eq((10 * 12.5) + (20 * 6.15) - (5 * 3.51))
     end
   end
 
